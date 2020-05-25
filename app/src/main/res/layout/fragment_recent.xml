@@ -6,14 +6,12 @@
     tools:context=".Recent">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <ImageView
+        android:id="@+id/profile_photo"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-
-
-        android:layout_height="800dp"
-        />
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_launcher_background"
+        android:scaleType="fitXY" />
 
 
 </FrameLayout>

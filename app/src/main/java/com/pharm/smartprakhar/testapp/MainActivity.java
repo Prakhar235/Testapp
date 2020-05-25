@@ -1,76 +1,129 @@
 package com.pharm.smartprakhar.testapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
-import com.pharm.smartprakhar.testapp.Adapters.Adapter_Pager;
 import com.pharm.smartprakhar.testapp.Adapters.Adapter_test;
 import com.pharm.smartprakhar.testapp.Common.MyApp;
 import com.pharm.smartprakhar.testapp.Interfaces.Retrofittnterface;
 import com.pharm.smartprakhar.testapp.Model.Banner;
-import com.pharm.smartprakhar.testapp.classes.SlidingTabLayout;
+import com.pharm.smartprakhar.testapp.classes.Imageviewmodel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    Imageviewmodel imagemodel;
+    RecyclerView recyclerView;
+    FrameLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Bannerextractor();
-       ViewPager vpPager =  findViewById(R.id.vpPager);
+        imagemodel= new ViewModelProvider(this).get(Imageviewmodel.class);
+        imagemodel.Bannerloader();
+         recyclerView =findViewById(R.id.recycler_view);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        mLayoutManager.setOrientation(RecyclerView.VERTICAL);
+       container= findViewById(R.id.fragmentcontainer);
+
+        recyclerView.setLayoutManager(mLayoutManager);
 
 
 
-      Adapter_Pager adapter_pager = new Adapter_Pager(((AppCompatActivity)this).getSupportFragmentManager(),getApplicationContext());
-    SlidingTabLayout tabLayout =  findViewById(R.id.sliding_tabs);
 
-        tabLayout.setDistributeEvenly(true);
-        vpPager.setAdapter(adapter_pager);
-        vpPager.setOffscreenPageLimit(0);
-        tabLayout.setViewPager(vpPager);
+        setrecyclerview(R.layout.layout_resource_demo);
 
 
+
+
+
+
+
+
+
+
+
+
+
+     }
+    Adapter_test testadapter;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
-     private void Bannerextractor()
-    {
-        Retrofittnterface retrofitinterface = MyApp.getRetrofitInstance().create(Retrofittnterface.class);
-        Call<Banner> retrofitcall = retrofitinterface.getBannerlist(MyApp.getBase_url()+"api/"+"banner");
-        retrofitcall.enqueue(new Callback<Banner>() {
-            @Override
-            public void onResponse(Call<Banner> call, Response<Banner> response) {
-                if(response.isSuccessful())
-                {
-
-             Adapter_test testadapter = new
-
-                     Adapter_test( response.body().getBannerlist(), getApplicationContext());
-               RecyclerView recyclerView =findViewById(R.id.recycler_view);
-
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                mLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-                recyclerView.setLayoutManager(mLayoutManager);
-                recyclerView.setAdapter(testadapter);
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Banner> call, Throwable t) {
-
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_1:
+                setrecyclerview(R.layout.layout_resource_demo);
 
 
+                return true;
+            case R.id.action_2:
+                setrecyclerview(R.layout.layout_resource_demo2);
 
 
+                return true;
+            case R.id.action_3:
+                setrecyclerview(R.layout.layout_resource_demo3);
+
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
+
+
+
+
+     public void setrecyclerview(final int layoutid)
+     {
+         imagemodel.getBannerlist().observe(this, new Observer<ArrayList<Banner>>() {
+             @Override
+             public void onChanged(ArrayList<Banner> banners) {
+
+                 testadapter = new
+
+                         Adapter_test( banners, MainActivity.this,container,layoutid);
+
+
+
+
+
+
+
+                 recyclerView.setAdapter(testadapter);
+
+
+             }
+         });
+
+
+
+
+
+     }
+
 }

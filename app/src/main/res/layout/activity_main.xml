@@ -13,24 +13,20 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:stateListAnimator="@null"
 
 
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
          />
-    <com.pharm.smartprakhar.testapp.classes.SlidingTabLayout
-        android:id="@+id/sliding_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Green" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vpPager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:background="@android:color/white" />
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentcontainer"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

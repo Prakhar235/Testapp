@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     android:padding="10dp"
     android:layout_margin="10dp"
     app:cardBackgroundColor="#FF7F50"
@@ -14,7 +14,7 @@
     <ImageView
         android:id="@+id/profile_photo"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@drawable/ic_launcher_background"
         android:scaleType="fitXY" />
 

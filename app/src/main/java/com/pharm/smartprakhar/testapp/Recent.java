@@ -3,21 +3,14 @@ package com.pharm.smartprakhar.testapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.pharm.smartprakhar.testapp.Adapters.Adapter_Products;
-import com.pharm.smartprakhar.testapp.Common.MyApp;
-import com.pharm.smartprakhar.testapp.Interfaces.Retrofittnterface;
-import com.pharm.smartprakhar.testapp.Model.Product;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.pharm.smartprakhar.testapp.classes.Transientbitmapsharer;
 
 
 /**
@@ -71,39 +64,14 @@ public class Recent extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_recent, container, false);
-        Productsetter(view);
+        Log.d("Fragment","recent");
+      ImageView imageView= view.findViewById(R.id.profile_photo);
+        Transientbitmapsharer sharer=Transientbitmapsharer.getsharer();
+       imageView.setImageBitmap(sharer.getBitmap());
+
         return view;
 
     }
 
-    private void Productsetter(final View view)
-    {
-        Retrofittnterface retrofitinterface = MyApp.getRetrofitInstance().create(Retrofittnterface.class);
-        Call<Product> retrofitcall = retrofitinterface.getRecentlist(MyApp.getBase_url()+"api/"+"recentselling");
-        retrofitcall.enqueue(new Callback<Product>() {
-            @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
-                if(response.isSuccessful())
-                {
-                    Adapter_Products Productadapter = new
 
-                            Adapter_Products( response.body().getProductlist(), getContext());
-                    RecyclerView recyclerView =view.findViewById(R.id.recycler_view);
-
-                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                    mLayoutManager.setOrientation(RecyclerView.VERTICAL);
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.setAdapter(Productadapter);
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Product> call, Throwable t) {
-
-            }
-        });
-
-    }
 }
