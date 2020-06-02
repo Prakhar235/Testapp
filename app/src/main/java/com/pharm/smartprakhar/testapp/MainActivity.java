@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Imageviewmodel imagemodel;
     RecyclerView recyclerView;
     FrameLayout container;
+    int layoutid=R.layout.layout_resource_demo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imagemodel= new ViewModelProvider(this).get(Imageviewmodel.class);
         imagemodel.Bannerloader();
+        container= findViewById(R.id.fragmentcontainer);
          recyclerView =findViewById(R.id.recycler_view);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
-        mLayoutManager.setOrientation(RecyclerView.VERTICAL);
-       container= findViewById(R.id.fragmentcontainer);
 
-        recyclerView.setLayoutManager(mLayoutManager);
 
 
 
@@ -75,17 +73,17 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_1:
-                setrecyclerview(R.layout.layout_resource_demo);
+                setrecyclerview(3);
 
 
                 return true;
             case R.id.action_2:
-                setrecyclerview(R.layout.layout_resource_demo2);
+                setrecyclerview(4);
 
 
                 return true;
             case R.id.action_3:
-                setrecyclerview(R.layout.layout_resource_demo3);
+                setrecyclerview(5);
 
 
                 return true;
@@ -98,24 +96,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-     public void setrecyclerview(final int layoutid)
+     public void setrecyclerview(final int gridcount)
      {
+
+         GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),gridcount);
+         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
+         testadapter = new
+
+                 Adapter_test( imagemodel.getBannerlist().getValue(), MainActivity.this,container,layoutid);
+         recyclerView.setAdapter(testadapter);
+
+
+
+         recyclerView.setLayoutManager(mLayoutManager);
          imagemodel.getBannerlist().observe(this, new Observer<ArrayList<Banner>>() {
              @Override
              public void onChanged(ArrayList<Banner> banners) {
-
-                 testadapter = new
-
-                         Adapter_test( banners, MainActivity.this,container,layoutid);
-
-
-
-
-
-
-
-                 recyclerView.setAdapter(testadapter);
-
+                 testadapter.notifyDataSetChanged();
 
              }
          });

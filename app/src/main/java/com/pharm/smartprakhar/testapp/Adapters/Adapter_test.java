@@ -121,7 +121,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
    @Override
     public int getItemCount() {
-        return list_names.size() ;
+       return list_names.size() ;
     }
 
     public void addLoadingFooter() {

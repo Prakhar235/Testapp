@@ -25,11 +25,13 @@ public class Imageviewmodel extends ViewModel {
     }
     public void Bannerloader()
     {
-        if(bannerlist==null)
+        repo=Repository.getRepository();
+        if(repo.bannerlist==null)
         {
-            bannerlist=new MutableLiveData<>();
-            repo=Repository.getRepository();
+
+
         bannerlist=    repo.Bannerextractor(this);
+
 
         }
 
@@ -40,5 +42,5 @@ public class Imageviewmodel extends ViewModel {
 
 
 
-    public MutableLiveData<ArrayList<Banner>> bannerlist;
+    public MutableLiveData<ArrayList<Banner>> bannerlist=new MutableLiveData<>();
 }
