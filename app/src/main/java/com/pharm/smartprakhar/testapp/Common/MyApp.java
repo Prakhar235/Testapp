@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class MyApp extends Application {
-    private static  String base_url ="https://serpapi.com/";
+    private static  String base_url ="http://www.maishainfotech.com/adinterview/";
 
     public static String getBase_url() {
         return base_url;

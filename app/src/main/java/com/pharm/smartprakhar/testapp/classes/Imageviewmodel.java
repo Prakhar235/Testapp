@@ -26,7 +26,7 @@ public class Imageviewmodel extends ViewModel {
     public void Bannerloader()
     {
         repo=Repository.getRepository();
-        if(repo.bannerlist==null)
+        if(repo.bannerlist.isEmpty())
         {
 
 

@@ -9,7 +9,7 @@ import retrofit2.http.Url;
 
 public interface Retrofittnterface {
 
-    @GET()
+    @POST()
     Call<Banner> getBannerlist(@Url String params);
 
 

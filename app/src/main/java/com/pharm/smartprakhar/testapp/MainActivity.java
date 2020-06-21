@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.pharm.smartprakhar.testapp.Adapters.Adapter_test;
 import com.pharm.smartprakhar.testapp.Common.MyApp;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        setrecyclerview(R.layout.layout_resource_demo);
+        setrecyclerview(3);
 
 
 
@@ -92,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void displayerrormessage(String errormessage)
+    {
+        Toast.makeText(this,errormessage,Toast.LENGTH_LONG);
+    }
 
 
 
@@ -101,18 +106,18 @@ public class MainActivity extends AppCompatActivity {
 
          GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),gridcount);
          mLayoutManager.setOrientation(RecyclerView.VERTICAL);
-         testadapter = new
-
-                 Adapter_test( imagemodel.getBannerlist().getValue(), MainActivity.this,container,layoutid);
-         recyclerView.setAdapter(testadapter);
-
 
 
          recyclerView.setLayoutManager(mLayoutManager);
          imagemodel.getBannerlist().observe(this, new Observer<ArrayList<Banner>>() {
              @Override
              public void onChanged(ArrayList<Banner> banners) {
-                 testadapter.notifyDataSetChanged();
+                 testadapter = new
+
+                         Adapter_test( banners, MainActivity.this,container,layoutid);
+                 recyclerView.setAdapter(testadapter);
+
+
 
              }
          });
