@@ -15,7 +15,7 @@ public class Banner {
         this.bannerlist = bannerlist;
     }
 
-    @SerializedName("images_results")
+    @SerializedName("MyArray")
     ArrayList<Banner> bannerlist;
     @SerializedName("title")
     String banner_name;
@@ -43,6 +43,6 @@ public class Banner {
     public void setBanner_id(int banner_id) {
         this.banner_id = banner_id;
     }
-    @SerializedName("original")
+    @SerializedName("message")
     String banner_image;
 }

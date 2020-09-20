@@ -11,12 +11,11 @@
 
    >
 
-    <ImageView
+    <TextView
         android:id="@+id/profile_photo"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/ic_launcher_background"
-        android:scaleType="fitXY" />
+         />
 
 
 

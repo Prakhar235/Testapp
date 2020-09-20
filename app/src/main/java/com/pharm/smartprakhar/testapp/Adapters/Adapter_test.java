@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,7 +46,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
 
 
-        private ImageView imageView_dp;
+        private TextView imageView_dp;
 
 
 
@@ -99,10 +100,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
 
-        Glide
-                .with(context)
-                .load(list_names.get(position).getBanner_image())
-                .into(holder.imageView_dp);
+        holder.imageView_dp.setText(list_names.get(position).getBanner_image());
         holder.imageView_dp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
