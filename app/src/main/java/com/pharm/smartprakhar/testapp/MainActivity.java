@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         imagemodel= new ViewModelProvider(this).get(Imageviewmodel.class);
         imagemodel.Bannerloader();
          recyclerView =findViewById(R.id.recycler_view);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
        container= findViewById(R.id.fragmentcontainer);
 
@@ -80,12 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.action_2:
-                setrecyclerview(R.layout.layout_resource_demo2);
+                setrecyclerview(R.layout.layout_resource_demo);
 
 
                 return true;
             case R.id.action_3:
-                setrecyclerview(R.layout.layout_resource_demo3);
+                setrecyclerview(R.layout.layout_resource_demo);
 
 
                 return true;

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,7 +47,9 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
 
 
-        private ImageView imageView_dp;
+        private TextView commit_id;
+        private TextView author;
+        private TextView message;
 
 
 
@@ -58,7 +62,13 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
 
 
-            imageView_dp =  itemView.findViewById(R.id.profile_photo);
+           commit_id =  itemView.findViewById(R.id.commitid);
+           author =  itemView.findViewById(R.id.authorname);
+           message =  itemView.findViewById(R.id.commitmessage);
+
+
+
+
 
 
 
@@ -99,19 +109,10 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
 
-        Glide
-                .with(context)
-                .load(list_names.get(position).getBanner_image())
-                .into(holder.imageView_dp);
-        holder.imageView_dp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                openfragment((ImageView)view);
-
-            }
-        });
+       Log.d("Authorname",list_names.get(position).getSha());
+       holder.commit_id.setText(list_names.get(position).getSha());
+       holder.author.setText(list_names.get(position).getCommit().getAuthor().getName());
+       holder.message.setText(list_names.get(position).getCommit().getMessage());
 
 
 

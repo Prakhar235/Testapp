@@ -1,48 +1,75 @@
 package com.pharm.smartprakhar.testapp.Model;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Banner {
-    @SerializedName("position")
-    int banner_id;
+public class Banner implements Serializable {
 
-    public ArrayList<Banner> getBannerlist() {
-        return bannerlist;
+    public ArrayList<Banner> myArray;
+
+    public ArrayList<Banner> getMyArray() {
+        return myArray;
     }
 
-    public void setBannerlist(ArrayList<Banner> bannerlist) {
-        this.bannerlist = bannerlist;
+    public void setMyArray(ArrayList<Banner> myArray) {
+        this.myArray = myArray;
     }
 
-    @SerializedName("images_results")
-    ArrayList<Banner> bannerlist;
-    @SerializedName("title")
-    String banner_name;
+    public String sha;
+    public String node_id;
 
-    public String getBanner_name() {
-        return banner_name;
+    public String getSha() {
+        return sha;
     }
 
-    public void setBanner_name(String banner_name) {
-        this.banner_name = banner_name;
+    public void setSha(String sha) {
+        this.sha = sha;
     }
 
-    public String getBanner_image() {
-        return banner_image;
+    public String getNode_id() {
+        return node_id;
     }
 
-    public void setBanner_image(String banner_image) {
-        this.banner_image = banner_image;
+    public void setNode_id(String node_id) {
+        this.node_id = node_id;
     }
 
-    public int getBanner_id() {
-        return banner_id;
+    public Commit getCommit() {
+        return commit;
     }
 
-    public void setBanner_id(int banner_id) {
-        this.banner_id = banner_id;
+    public void setCommit(Commit commit) {
+        this.commit = commit;
     }
-    @SerializedName("original")
-    String banner_image;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getHtml_url() {
+        return html_url;
+    }
+
+    public void setHtml_url(String html_url) {
+        this.html_url = html_url;
+    }
+
+    public String getComments_url() {
+        return comments_url;
+    }
+
+    public void setComments_url(String comments_url) {
+        this.comments_url = comments_url;
+    }
+
+    public Commit commit;
+    public String url;
+    public String html_url;
+    public String comments_url;
 }

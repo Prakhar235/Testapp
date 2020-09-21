@@ -35,14 +35,14 @@ public class Repository {
     public  MutableLiveData<ArrayList<Banner>> Bannerextractor( final Imageviewmodel caller)
     {
         Retrofittnterface retrofitinterface = MyApp.getRetrofitInstance().create(Retrofittnterface.class);
-        Call<Banner> retrofitcall = retrofitinterface.getBannerlist(MyApp.getBase_url()+"search.json?q=Apple&tbm=isch&ijn=0");
-        retrofitcall.enqueue(new Callback<Banner>() {
-            @Override
-            public void onResponse(Call<Banner> call, Response<Banner> response) {
-                if(response.isSuccessful())
-                {
-                    bannerlist=response.body().getBannerlist();
-                    list.setValue(bannerlist);
+        Call<ArrayList<Banner>> retrofitcall = retrofitinterface.getBannerlist(MyApp.getBase_url()+"repos/square/retrofit/commits");
+       retrofitcall.enqueue(new Callback<ArrayList<Banner>>() {
+           @Override
+           public void onResponse(Call<ArrayList<Banner>> call, Response<ArrayList<Banner>> response) {
+               if(response.isSuccessful())
+               {
+                   bannerlist=response.body();
+                   list.setValue(bannerlist);
 
 
 
@@ -51,15 +51,15 @@ public class Repository {
 
 
 
-                }
+               }
 
-            }
+           }
 
-            @Override
-            public void onFailure(Call<Banner> call, Throwable t) {
+           @Override
+           public void onFailure(Call<ArrayList<Banner>> call, Throwable t) {
 
-            }
-        });
+           }
+       });
 
         return list;
 
