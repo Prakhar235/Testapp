@@ -110,7 +110,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
 
        Log.d("Authorname",list_names.get(position).getSha());
-       holder.commit_id.setText(list_names.get(position).getSha());
+       holder.commit_id.setText("Commit id:   "+list_names.get(position).getSha());
        holder.author.setText(list_names.get(position).getCommit().getAuthor().getName());
        holder.message.setText(list_names.get(position).getCommit().getMessage());
 
@@ -134,28 +134,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
         isLoadingAdded = false;
 
     }
-    private  void openfragment(ImageView imageview )
-    {
-        Bitmap bm=((BitmapDrawable)imageview.getDrawable()).getBitmap();
-        Transientbitmapsharer sharer=Transientbitmapsharer.getsharer();
-        sharer.setBitmap(bm);
-        Recent recent=Recent.newInstance("fragment","recent");
 
-      FragmentManager fragmentmanager = (( MainActivity) context).getSupportFragmentManager();
-
-        if(recent!= null) {
-            fragmentmanager.beginTransaction().remove(recent).commit();
-        }
-      FragmentTransaction  transaction=fragmentmanager.beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.setCustomAnimations(R.anim.animation1,R.anim.animation2,R.anim.animation1,R.anim.animation2);
-      transaction.add(container.getId(),recent,"recent").commit();
-
-
-
-
-
-    }
 
 
 }
