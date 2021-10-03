@@ -21,7 +21,7 @@ public class Imageviewmodel extends ViewModel {
 
 
 
-    public LiveData<ArrayList<Banner>> getBannerlist() {
+    public LiveData<Banner> getBannerlist() {
 
         return bannerlist;
     }
@@ -42,9 +42,9 @@ public class Imageviewmodel extends ViewModel {
 
 
 
-    public MutableLiveData<ArrayList<Banner>> bannerlist;
+    public MutableLiveData<Banner> bannerlist;
     private CountDownTimer countDownTimer;
-    long timetick=5000000;
+    long timetick=50000;
 
     public void startTimer() {
         view.startMusicPlayer();

@@ -2,6 +2,8 @@ package com.pharm.smartprakhar.testapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,11 +29,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.pharm.smartprakhar.testapp.Adapters.Adapter_test;
 import com.pharm.smartprakhar.testapp.Common.MyApp;
 import com.pharm.smartprakhar.testapp.Interfaces.Retrofittnterface;
@@ -101,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_date;
     @BindView(R.id.tv_OrderTime)
     TextView tv_OrderTime;
+    @BindView(R.id.apiImage)
+    ImageView imageView;
 
 
 
@@ -274,10 +280,21 @@ public class MainActivity extends AppCompatActivity {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
+        imageView.setVisibility(View.VISIBLE);
+        imagemodel.Bannerloader();
+        imagemodel.getBannerlist().observe(this, new Observer<Banner>() {
+                    @Override
+                    public void onChanged(Banner banner) {
+                        Toast.makeText(getBaseContext(),banner.getBanner_name(),Toast.LENGTH_LONG).show();
+                        Glide
+                                .with(getBaseContext())
+                                .load(banner.getBanner_image())
+                                .into(imageView);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+                    }
+                });
+
+
     }
 
 }

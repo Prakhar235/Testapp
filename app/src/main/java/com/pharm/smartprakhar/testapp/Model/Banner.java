@@ -4,20 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class Banner {
-    @SerializedName("position")
-    int banner_id;
-
-    public ArrayList<Banner> getBannerlist() {
-        return bannerlist;
-    }
-
-    public void setBannerlist(ArrayList<Banner> bannerlist) {
-        this.bannerlist = bannerlist;
-    }
-
-    @SerializedName("images_results")
-    ArrayList<Banner> bannerlist;
-    @SerializedName("title")
+    @SerializedName("status")
     String banner_name;
 
     public String getBanner_name() {
@@ -36,13 +23,7 @@ public class Banner {
         this.banner_image = banner_image;
     }
 
-    public int getBanner_id() {
-        return banner_id;
-    }
 
-    public void setBanner_id(int banner_id) {
-        this.banner_id = banner_id;
-    }
-    @SerializedName("original")
+    @SerializedName("message")
     String banner_image;
 }

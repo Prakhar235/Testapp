@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class Repository {
   static   Repository obj;
-  private ArrayList<Banner> bannerlist=new ArrayList<>();
+  private Banner banner=new Banner();
 
 
    private Repository() {
@@ -29,20 +29,20 @@ public class Repository {
         }
         return obj;
     }
-    MutableLiveData<ArrayList<Banner>> list=new MutableLiveData<>();
+    MutableLiveData<Banner> list=new MutableLiveData<>();
 
 
-    public  MutableLiveData<ArrayList<Banner>> Bannerextractor( final Imageviewmodel caller)
+    public  MutableLiveData<Banner> Bannerextractor( final Imageviewmodel caller)
     {
         Retrofittnterface retrofitinterface = MyApp.getRetrofitInstance().create(Retrofittnterface.class);
-        Call<Banner> retrofitcall = retrofitinterface.getBannerlist(MyApp.getBase_url()+"search.json?q=Apple&tbm=isch&ijn=0");
+        Call<Banner> retrofitcall = retrofitinterface.getBannerlist("https://dog.ceo/api/breeds/image/random");
         retrofitcall.enqueue(new Callback<Banner>() {
             @Override
             public void onResponse(Call<Banner> call, Response<Banner> response) {
                 if(response.isSuccessful())
                 {
-                    bannerlist=response.body().getBannerlist();
-                    list.setValue(bannerlist);
+                  banner=response.body();
+                  list.setValue(banner);
 
 
 
