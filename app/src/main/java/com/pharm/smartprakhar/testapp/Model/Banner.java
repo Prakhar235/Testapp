@@ -1,11 +1,33 @@
 package com.pharm.smartprakhar.testapp.Model;
+import android.graphics.Bitmap;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 public class Banner {
-    @SerializedName("position")
-    int banner_id;
+    @SerializedName("uitype")
+    String banner_id;
+    @SerializedName("logo-url")
+    String logo_url;
+
+    public Bitmap getLoadedImage() {
+        return loadedImage;
+    }
+
+    public void setLoadedImage(Bitmap loadedImage) {
+        this.loadedImage = loadedImage;
+    }
+
+    Bitmap loadedImage;
+
+    public String getLogo_url() {
+        return logo_url;
+    }
+
+    public void setLogo_url(String logo_url) {
+        this.logo_url = logo_url;
+    }
 
     public ArrayList<Banner> getBannerlist() {
         return bannerlist;
@@ -15,10 +37,18 @@ public class Banner {
         this.bannerlist = bannerlist;
     }
 
-    @SerializedName("images_results")
+    @SerializedName("uidata")
     ArrayList<Banner> bannerlist;
-    @SerializedName("title")
+    @SerializedName("value")
     String banner_name;
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
 
     public String getBanner_name() {
         return banner_name;
@@ -28,21 +58,23 @@ public class Banner {
         this.banner_name = banner_name;
     }
 
-    public String getBanner_image() {
-        return banner_image;
+    public String getKey() {
+        return key;
     }
 
-    public void setBanner_image(String banner_image) {
-        this.banner_image = banner_image;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public int getBanner_id() {
+    public String getBanner_id() {
         return banner_id;
     }
 
-    public void setBanner_id(int banner_id) {
+    public void setBanner_id(String banner_id) {
         this.banner_id = banner_id;
     }
-    @SerializedName("original")
-    String banner_image;
+    @SerializedName("key")
+    String key;
+    @SerializedName("hint")
+    String hint;
 }

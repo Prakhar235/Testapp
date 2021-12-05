@@ -7,8 +7,12 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,7 +49,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
 
 
-        private ImageView imageView_dp;
+        private LinearLayout baseView;
 
 
 
@@ -58,7 +62,7 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
 
 
-            imageView_dp =  itemView.findViewById(R.id.profile_photo);
+            baseView =  itemView.findViewById(R.id.baseView);
 
 
 
@@ -97,24 +101,39 @@ public class Adapter_test extends RecyclerView.Adapter<Adapter_test.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.baseView.removeAllViews();
+        switch (list_names.get(position).getBanner_id())
+        {
+            case "label":
+                TextView textView = new TextView(context);
+                textView.setText(list_names.get(position).getBanner_name());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                textView.setLayoutParams(params);
+                holder.baseView.addView(textView);
 
+                break;
+            case "edittext":
+                EditText editText = new EditText(context);
+               editText.setHint(list_names.get(position).getHint());
+                LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                editText.setLayoutParams(editTextparams);
+                holder.baseView.addView(editText);
 
-        Glide
-                .with(context)
-                .load(list_names.get(position).getBanner_image())
-                .into(holder.imageView_dp);
-        holder.imageView_dp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                openfragment((ImageView)view);
-
-            }
-        });
-
-
-
+                break;
+            case "button":
+                Button button = new Button(context);
+                button.setText(list_names.get(position).getBanner_name());
+                LinearLayout.LayoutParams buttonparams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                button.setLayoutParams(buttonparams);
+                holder.baseView.addView(button);
+                break;
+        }
 
     }
 
