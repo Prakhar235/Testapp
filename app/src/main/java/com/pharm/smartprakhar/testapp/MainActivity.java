@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.pharm.smartprakhar.testapp.Adapters.Adapter_test;
 import com.pharm.smartprakhar.testapp.Model.Banner;
 import com.pharm.smartprakhar.testapp.classes.Imageviewmodel;
@@ -35,57 +36,26 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
        container= findViewById(R.id.fragmentcontainer);
        imageView=findViewById(R.id.imageView);
-
-        recyclerView.setLayoutManager(mLayoutManager);
-
-
-
-
+       recyclerView.setLayoutManager(mLayoutManager);
         setrecyclerview(R.layout.layout_resource_demo);
-
-
-
-
-
-
-
-
-
-
-
-
-
-     }
-    Adapter_test testadapter;
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
     }
+    Adapter_test testadapter;
 
 
-
-
-     public void setrecyclerview(final int layoutid)
+    public void setrecyclerview(final int layoutid)
      {
          imagemodel.getBanner().observe(this, new Observer<Banner>() {
              @Override
              public void onChanged(Banner banner) {
+                 if(banner.getLoadedImage()!=null)
                 imageView.setImageBitmap(banner.getLoadedImage());
                  testadapter = new
-
                          Adapter_test( banner.getBannerlist(), MainActivity.this,container,layoutid);
                  recyclerView.setAdapter(testadapter);
 
              }
 
          });
-
-
-
-
-
      }
 
 }

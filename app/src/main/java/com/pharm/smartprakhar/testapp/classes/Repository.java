@@ -36,7 +36,7 @@ public class Repository {
     MutableLiveData<Banner> list=new MutableLiveData<>();
     Bitmap bitmap=null;
 
-    public  Bitmap imageLoader( String URL)
+    public  Bitmap imageLoader(String URL, final Banner body)
     {
 
         Network retrofitinterface = MyApp.getRetrofitInstance().create(Network.class);
@@ -49,6 +49,7 @@ public class Repository {
                     try {
                         byte[] bytes =  response.body().bytes();
                         bitmap=BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        body.setLoadedImage(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -83,8 +84,8 @@ public class Repository {
                 {
                     bannerlist=response.body();
                     list.setValue(bannerlist);
-                    if (response.body() != null) {
-                        response.body().setLoadedImage(imageLoader(response.body().getLogo_url()));
+                    if (response.body() != null && response.body().getLogo_url()!=null) {
+                       imageLoader(response.body().getLogo_url(),response.body());
 
                     }
 
